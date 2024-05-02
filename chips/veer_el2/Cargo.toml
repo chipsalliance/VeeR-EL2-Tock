@@ -1,0 +1,12 @@
+[package]
+name = "veer_el2"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+
+[dependencies]
+swerv = { path = "../swerv" }
+sifive = { path = "../sifive" }
+rv32i = { path = "../../arch/rv32i" }
+kernel = { path = "../../kernel" }
+lowrisc = { path = "../lowrisc" }
