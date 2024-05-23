@@ -10,8 +10,8 @@ authors.workspace = true
 edition.workspace = true
 
 [dependencies]
-swerv = { path = "../swerv" }
 sifive = { path = "../sifive" }
 rv32i = { path = "../../arch/rv32i" }
 kernel = { path = "../../kernel" }
 lowrisc = { path = "../lowrisc" }
+riscv-csr = { path = "../../libraries/riscv-csr" }
