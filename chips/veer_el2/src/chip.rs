@@ -13,8 +13,8 @@ use rv32i::csr::{mcause, mie::mie, mip::mip, CSR};
 use rv32i::pmp::{simple::SimplePMP, PMPUserMPU};
 use rv32i::syscall::SysCall;
 
-use swerv::eh1_pic::Pic;
-use swerv::eh1_pic::PicRegisters;
+use crate::pic::Pic;
+use crate::pic::PicRegisters;
 
 pub const PIC_BASE: StaticRef<PicRegisters> =
     unsafe { StaticRef::new(0xf00c_0000 as *const PicRegisters) };

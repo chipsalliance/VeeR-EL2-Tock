@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 // Copyright Tock Contributors 2022.
 
-//! Platform Level Interrupt Control peripheral driver for SweRV EH1.
+//! Platform Level Interrupt Control peripheral driver for VeeR.
 
 use kernel::utilities::cells::VolatileCell;
 use kernel::utilities::registers::interfaces::{Readable, Writeable};

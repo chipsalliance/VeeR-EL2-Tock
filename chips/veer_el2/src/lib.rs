@@ -5,4 +5,5 @@
 pub mod chip;
 pub mod io;
 pub mod machine_timer;
+pub mod pic;
 pub mod uart;
