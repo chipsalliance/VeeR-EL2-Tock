@@ -3,6 +3,7 @@
 // Copyright (c) 2024 Antmicro <www.antmicro.com>
 
 use core::panic::PanicInfo;
+use core::ptr::write_volatile;
 use kernel::debug;
 use veer_el2::io::Writer;
 
@@ -30,9 +31,7 @@ pub unsafe fn panic_fmt(pi: &PanicInfo) -> ! {
 
     // By writing 0xff to this address we can exit the simulation.
     // So instead of blinking in a loop let's exit the simulation.
-    // write_volatile(0xd0580000 as *mut u8, 0xff);
-
-    loop {}
+    write_volatile(0xd0580000 as *mut u8, 0xff);
 
     unreachable!()
 }
