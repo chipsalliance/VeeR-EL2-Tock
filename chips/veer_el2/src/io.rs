@@ -32,7 +32,7 @@ impl IoWrite for Writer {
 
 pub struct SemihostUart {}
 
-impl<'a> SemihostUart {
+impl SemihostUart {
     pub fn new() -> SemihostUart {
         SemihostUart {}
     }
