@@ -38,10 +38,12 @@ pub type VeeRChip = veer_el2::chip::VeeR<'static, VeeRDefaultPeripherals<'static
 // Reference to the chip for panic dumps.
 static mut CHIP: Option<&'static VeeRChip> = None;
 // Static reference to process printer for panic dumps.
-static mut PROCESS_PRINTER: Option<&'static kernel::process::ProcessPrinterText> = None;
+static mut PROCESS_PRINTER: Option<&'static capsules_system::process_printer::ProcessPrinterText> =
+    None;
 
 // How should the kernel respond when a process faults.
-const FAULT_RESPONSE: kernel::process::PanicFaultPolicy = kernel::process::PanicFaultPolicy {};
+const FAULT_RESPONSE: capsules_system::process_policies::PanicFaultPolicy =
+    capsules_system::process_policies::PanicFaultPolicy {};
 
 /// Dummy buffer that causes the linker to reserve enough space for the stack.
 #[no_mangle]
@@ -105,7 +107,7 @@ impl KernelResources<VeeRChip> for VeeR {
 #[no_mangle]
 pub unsafe fn main() {
     // only machine mode
-    rv32i::configure_trap_handler(rv32i::PermissionMode::Machine);
+    rv32i::configure_trap_handler();
 
     let peripherals = static_init!(VeeRDefaultPeripherals, VeeRDefaultPeripherals::new());
     peripherals.init();
