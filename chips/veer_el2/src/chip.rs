@@ -6,6 +6,7 @@
 
 use crate::machine_timer::Clint;
 use core::fmt::Write;
+use core::ptr::addr_of;
 use kernel::platform::chip::{Chip, InterruptService};
 use kernel::utilities::registers::interfaces::{ReadWriteable, Readable};
 use kernel::utilities::StaticRef;
@@ -72,7 +73,7 @@ impl<'a, I: InterruptService + 'a> VeeR<'a, I> {
     pub unsafe fn new(pic_interrupt_service: &'a I, mtimer: &'static Clint) -> Self {
         Self {
             userspace_kernel_boundary: SysCall::new(),
-            pic: &PIC,
+            pic: &*addr_of!(PIC),
             mtimer,
             pic_interrupt_service,
             pmp: PMPUserMPU::new(SimplePMP::new().unwrap()),

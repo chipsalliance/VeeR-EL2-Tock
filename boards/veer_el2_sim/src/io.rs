@@ -4,6 +4,7 @@
 
 use core::panic::PanicInfo;
 use core::ptr::write_volatile;
+use core::ptr::{addr_of, addr_of_mut};
 use kernel::debug;
 use veer_el2::io::Writer;
 
@@ -18,15 +19,15 @@ static mut WRITER: Writer = Writer {};
 #[no_mangle]
 #[panic_handler]
 pub unsafe fn panic_fmt(pi: &PanicInfo) -> ! {
-    let writer = &mut WRITER;
+    let writer = &mut *addr_of_mut!(WRITER);
 
     debug::panic_print(
         writer,
         pi,
         &rv32i::support::nop,
-        &PROCESSES,
-        &CHIP,
-        &PROCESS_PRINTER,
+        &*addr_of!(PROCESSES),
+        &*addr_of!(CHIP),
+        &*addr_of!(PROCESS_PRINTER),
     );
 
     // By writing 0xff to this address we can exit the simulation.
